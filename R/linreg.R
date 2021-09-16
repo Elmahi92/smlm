@@ -1,3 +1,26 @@
+#' A reference class representing av linear regression model
+#'
+#' @field beta_hat A matrix containing the estimated coefficients
+#' @field y_hat A matrix containing the fitted values
+#' @field res A matrix containing the residuals
+#' @field df A numeric vector containg the degrees of freedom
+#' @field res_var A numeric vector containing the residual variance
+#' @field beta_hat_var A matrix containing the variance of the estimated coefficients
+#' @field t_values A matrix containg the t-values of the estimated coefficients
+#' @field p_values A matrix containg the p-values of the estimated coefficients
+#' @field resstd A matrix containg the standardized residuals
+#' @method print Prints out the coefficients and the coefficient names
+#' @method plot_res Plots the residuals versus the fitted values
+#' @method plot_resstd Plots the square root of the standardized residuals versus the fitted values
+#' @method resid Returns a vector with the residuals
+#' @method pred Returns a vector with the fitted values
+#' @method coef Returns the estimated coefficients
+#' @method summary Returns a summary of the linear regression model
+#' @return An object of class linreg
+#' @examples
+#' linreg(iris, as.formula("Petal.Length ~ Species"))
+#' linreg(iris, as.formula("Petal.Length ~ Sepal.Width + Sepal.Length"))
+#' @references \url{https://en.wikipedia.org/wiki/Least_squares}
 linreg <- setRefClass("linreg",
                       fields = list(
                         beta_hat = "matrix",
