@@ -45,7 +45,7 @@ linreg <- setRefClass("linreg",
                           beta_hat_var <<- res_var * (solve(t(X) %*% X))
                           t_values <<- beta_hat / sqrt(diag(beta_hat_var))
                           p_values <<- 2*pt(-abs(t_values), df = df)
-                          resstd<<- na.omit(sqrt(res/res_var),0)
+                          resstd <<- sqrt(abs(linreg_m$res / sqrt(linreg_m$res_var)))
                         },
                         print = function() {
                           cat("test!")
