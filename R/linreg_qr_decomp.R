@@ -7,6 +7,7 @@
 #' linreg_qr_decomp(iris, as.formula("Petal.Length ~ Species"))
 #' linreg_qr_decomp(iris, as.formula("Petal.Length ~ Sepal.Width + Sepal.Length"))
 #' @references \url{https://en.wikipedia.org/wiki/QR_decomposition}
+#' @export
 linreg_qr_decomp <- function(data, formula) {
   X <- model.matrix(formula, data = data)
   y <- data[,all.vars(formula)[1]]

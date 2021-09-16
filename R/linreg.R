@@ -14,6 +14,7 @@
 #' linreg(iris, as.formula("Petal.Length ~ Species"))
 #' linreg(iris, as.formula("Petal.Length ~ Sepal.Width + Sepal.Length"))
 #' @references \url{https://en.wikipedia.org/wiki/Least_squares}
+#' @export
 linreg <- setRefClass("linreg",
                       fields = list(
                         beta_hat = "matrix",
