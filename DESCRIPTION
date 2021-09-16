@@ -1,13 +1,11 @@
 Package: smlm
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Linear Regression Model
+Version: 0.1
 Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    c(person("Simon", "Elsen", email = "simal451@student.liu.se", role = c("cre")),
+    person("Mohamed", "Ali", email = "mohal954@student.liu.se", role = c("aut")),
+    person("Haseeb", "Ur Rehman", email = "hasre478@student.liu.se", role = c("aut")))
+Description: Linear regression attempts to model the relationship between two variables by fitting a linear equation to observed data. One variable is considered to be an explanatory variable, and the other is considered to be a dependent variable. For example, a modeler might want to relate the weights of individuals to their heights using a linear regression model.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
