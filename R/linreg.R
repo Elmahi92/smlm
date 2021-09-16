@@ -7,6 +7,7 @@ linreg <- setRefClass("linreg",
                         res_var = "numeric",
                         beta_hat_var = "matrix",
                         t_values = "matrix",
+                        p_values = "matrix",
                         resstd = "matrix"
                       ),
                       methods = list(
@@ -20,6 +21,7 @@ linreg <- setRefClass("linreg",
                           res_var <<- as.numeric((t(res) %*% res) / df)
                           beta_hat_var <<- res_var * (solve(t(X) %*% X))
                           t_values <<- beta_hat / sqrt(diag(beta_hat_var))
+                          p_values <<- 2*pt(-abs(t_values), df = df)
                           resstd<<- na.omit(sqrt(res/res_var),0)
                         },
                         print = function() {
@@ -60,6 +62,13 @@ linreg <- setRefClass("linreg",
                           return(coef_vec)
                         },
                         summary = function() {
-                          cat("summary!")
+                          summary_df <- data.frame(beta_hat,
+                                                   sqrt(diag(beta_hat_var)),
+                                                   t_values,
+                                                   p_values)
+                          colnames(summary_df) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)")
+
+                          print.data.frame(summary_df)
+                          cat("\nResidual standard error: ", res_var, "\nDegrees of freedom: ", df)
                         }
                       ))
