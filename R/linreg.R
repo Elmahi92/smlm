@@ -97,6 +97,6 @@ linreg <- setRefClass("linreg",
                           colnames(summary_df) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)")
 
                           print.data.frame(summary_df)
-                          cat("\nResidual standard error: ", res_var, "\nDegrees of freedom: ", df)
+                          cat("\nResidual standard error: ", sqrt(res_var), "\nDegrees of freedom: ", df)
                         }
                       ))
