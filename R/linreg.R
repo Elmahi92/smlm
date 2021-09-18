@@ -1,5 +1,7 @@
 #' A reference class representing av linear regression model
 #'
+#' @import ggplot2
+#'
 #' @field beta_hat A matrix containing the estimated coefficients
 #' @field y_hat A matrix containing the fitted values
 #' @field res A matrix containing the residuals
@@ -26,8 +28,8 @@ linreg <- setRefClass("linreg",
                         t_values = "matrix",
                         p_values = "matrix",
                         resstd = "matrix",
-                        reg_formula = "formula", ###
-                        data_name = "character" ###
+                        reg_formula = "formula",
+                        data_name = "character"
                       ),
                       methods = list(
                         initialize = function(data, formula) {
@@ -54,10 +56,14 @@ linreg <- setRefClass("linreg",
                         },
                         plot_res = function() {
                           "Plots the residuals versus the fitted values"
-                          ggplot(data = data.frame(y_hat, res), aes(x = y_hat, y = res)) +
+                          plot_df <- data.frame(y_hat, res)
+                          ggplot2::ggplot(data = plot_df, aes(x = y_hat, y = res)) +
                             geom_point(shape = 21, colour = "black", fill = "white") +
-                            geom_path(data = as.data.frame(with(data.frame(y_hat, res), lowess(x = y_hat, y = res))),
+                            geom_path(data = as.data.frame(with(plot_df, lowess(x = y_hat, y = res))),
                                       aes(x = x, y = y), col = "red") +
+                            geom_text(data = plot_df[order(abs(plot_df$res), decreasing = TRUE)[1:3],],
+                                      aes(label = order(abs(plot_df$res), decreasing = TRUE)[1:3]),
+                                      position = position_nudge(x = -0.1)) +
                             ggtitle("Residuals vs Fitted") +
                             labs(x = "Fitted values", y = "Residuals") +
                             theme_bw() +
@@ -66,7 +72,7 @@ linreg <- setRefClass("linreg",
                         },
                         plot_resstd = function() {
                           "Plots the square root of the standardized residuals versus the fitted values"
-                          ggplot(data = data.frame(y_hat, resstd), aes(x = y_hat, y = resstd)) +
+                          ggplot2::ggplot(data = data.frame(y_hat, resstd), aes(x = y_hat, y = resstd)) +
                             geom_point(shape = 21, colour = "black", fill = "white") +
                             geom_path(data = as.data.frame(with(data.frame(y_hat,resstd ), lowess(x = y_hat, y = resstd))),
                                       aes(x = x, y = y), col = "red") +
