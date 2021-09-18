@@ -25,7 +25,9 @@ linreg <- setRefClass("linreg",
                         beta_hat_var = "matrix",
                         t_values = "matrix",
                         p_values = "matrix",
-                        resstd = "matrix"
+                        resstd = "matrix",
+                        reg_formula = "formula", ###
+                        data_name = "character" ###
                       ),
                       methods = list(
                         initialize = function(data, formula) {
@@ -39,15 +41,16 @@ linreg <- setRefClass("linreg",
                           beta_hat_var <<- res_var * (solve(t(X) %*% X))
                           t_values <<- beta_hat / sqrt(diag(beta_hat_var))
                           p_values <<- 2*pt(-abs(t_values), df = df)
-<<<<<<< HEAD
                           resstd<<- sqrt(abs(res / sqrt(res_var)))
-=======
                           resstd <<- sqrt(abs(res / sqrt(res_var)))
->>>>>>> 7f5118a86f90dedeec83e176874dae1893cf85d1
+                          reg_formula <<- formula
+                          data_name <<- deparse(substitute(data))
                         },
                         print = function() {
                           "Prints out the coefficients and the coefficient names"
-                          cat("test!")
+                          cat("linreg(formula = ", deparse(reg_formula), ", data = ", data_name,  ")\n\n", sep = "")
+                          print_df <- as.data.frame(t(beta_hat))
+                          print.data.frame(print_df, row.names = FALSE)
                         },
                         plot_res = function() {
                           "Plots the residuals versus the fitted values"
@@ -96,7 +99,8 @@ linreg <- setRefClass("linreg",
                                                    p_values)
                           colnames(summary_df) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)")
 
-                          print.data.frame(summary_df)
-                          cat("\nResidual standard error: ", sqrt(res_var), "\nDegrees of freedom: ", df)
+                          row.names(summary_df) <- row.names(beta_hat)
+                          printCoefmat(summary_df)
+                          cat("\nResidual standard error:", sqrt(res_var), "on", df, "degrees of freedom")
                         }
                       ))
