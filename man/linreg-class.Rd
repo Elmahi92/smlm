@@ -38,9 +38,7 @@ A reference class representing av linear regression model
 \describe{
 \item{\code{coef()}}{Returns the estimated coefficients}
 
-\item{\code{plot_res()}}{Plots the residuals versus the fitted values}
-
-\item{\code{plot_resstd()}}{Plots the square root of the standardized residuals versus the fitted values}
+\item{\code{plot()}}{Plots the residuals versus the fitted values and the square root of the standardized residuals versus the fitted values}
 
 \item{\code{pred()}}{Returns a vector with the fitted values}
 

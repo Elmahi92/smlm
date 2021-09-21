@@ -1,6 +1,7 @@
 #' A reference class representing av linear regression model
 #'
 #' @import ggplot2
+#' @import gridExtra
 #'
 #' @field beta_hat A matrix containing the estimated coefficients
 #' @field y_hat A matrix containing the fitted values
@@ -54,10 +55,11 @@ linreg <- setRefClass("linreg",
                           print_df <- as.data.frame(t(beta_hat))
                           print.data.frame(print_df, row.names = FALSE)
                         },
-                        plot_res = function() {
-                          "Plots the residuals versus the fitted values"
+                        plot = function() {
+                          "Plots the residuals versus the fitted values and the square root of the standardized residuals versus the fitted values"
                           plot_df <- data.frame(y_hat, res)
-                          ggplot2::ggplot(data = plot_df, aes(x = y_hat, y = res)) +
+
+                          p1 <- ggplot2::ggplot(data = plot_df, aes(x = y_hat, y = res)) +
                             geom_point(shape = 21, colour = "black", fill = "white") +
                             geom_path(data = as.data.frame(with(plot_df, lowess(x = y_hat, y = res))),
                                       aes(x = x, y = y), col = "red") +
@@ -69,10 +71,8 @@ linreg <- setRefClass("linreg",
                             theme_bw() +
                             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
                                   plot.title = element_text(hjust = 0.5))
-                        },
-                        plot_resstd = function() {
-                          "Plots the square root of the standardized residuals versus the fitted values"
-                          ggplot2::ggplot(data = data.frame(y_hat, resstd), aes(x = y_hat, y = resstd)) +
+
+                          p2 <- ggplot2::ggplot(data = data.frame(y_hat, resstd), aes(x = y_hat, y = resstd)) +
                             geom_point(shape = 21, colour = "black", fill = "white") +
                             geom_path(data = as.data.frame(with(data.frame(y_hat,resstd ), lowess(x = y_hat, y = resstd))),
                                       aes(x = x, y = y), col = "red") +
@@ -81,6 +81,8 @@ linreg <- setRefClass("linreg",
                             theme_bw() +
                             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
                                   plot.title = element_text(hjust = 0.5))
+
+                          grid.arrange(p1,p2)
                         },
                         resid = function() {
                           "Returns a vector with the residuals"

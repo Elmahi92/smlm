@@ -16,6 +16,7 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 Imports:
-    ggplot2
+    ggplot2,
+    gridExtra
 Config/testthat/edition: 3
 VignetteBuilder: knitr

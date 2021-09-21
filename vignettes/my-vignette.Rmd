@@ -50,7 +50,7 @@ linreg_mod$print()
 ### Step 6: Plot the residuals versus the fitted values
 Plot the residuals and the standardized residuals versus the fitted values.
 ```{r plot}
-linreg_mod$plot_res()
+linreg_mod$plot()
 ```
 
 ### Step 7: Retrieve the residuals
