@@ -76,7 +76,7 @@ linreg <- setRefClass("linreg",
                             geom_point(shape = 21, colour = "black", fill = "white") +
                             geom_path(data = as.data.frame(with(data.frame(y_hat,resstd ), lowess(x = y_hat, y = resstd))),
                                       aes(x = x, y = y), col = "red") +
-                            ggtitle("Scale−Location") +
+                            ggtitle("Scale-Location") +
                             labs(x = "Fitted values", y = "Standardized residuals") +
                             theme_bw() +
                             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
