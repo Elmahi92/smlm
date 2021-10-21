@@ -2,5 +2,6 @@
 
 export(linreg)
 export(linreg_qr_decomp)
+export(ridgereg)
 import(ggplot2)
 import(gridExtra)
