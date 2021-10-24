@@ -19,6 +19,7 @@ The linreg function fits a linear regression model using ordinary least squares.
 Start by loading the *smlm* package.
 ```{r setup}
 library(smlm)
+library(gridExtra)
 ```
 
 
