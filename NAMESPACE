@@ -2,11 +2,5 @@
 
 export(linreg)
 export(linreg_qr_decomp)
-export(ridgereg)
-export(visualize_airport_delays)
-import(dplyr)
 import(ggplot2)
 import(gridExtra)
-import(nycflights13)
-import(plotly)
-import(seriation)
